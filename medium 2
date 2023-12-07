@@ -1,0 +1,66 @@
+MEADIUM 2
+Given an integer array of size n,find all elements that appear more than ⌊ n/3 ⌋ times.
+
+ CODE
+ def majority_elements(nums):
+    candidate1, candidate2 = None, None
+    count1, count2 = 0, 0
+
+    for num in nums:
+        if num == candidate1:
+            count1 += 1
+        elif num == candidate2:
+            count2 += 1
+        elif count1 == 0:
+            candidate1, count1 = num, 1
+        elif count2 == 0:
+            candidate2, count2 = num, 1
+        else:
+            count1 -= 1
+            count2 -= 1
+
+    count1, count2 = 0, 0
+
+    for num in nums:
+        if num == candidate1:
+            count1 += 1
+        elif num == candidate2:
+            count2 += 1
+
+    result = []
+    n = len(nums)
+
+    if count1 > n // 3:
+        result.append(candidate1)
+    if count2 > n // 3:
+        result.append(candidate2)
+
+    return result
+
+nums = [3, 2, 3]
+result = majority_elements(nums)
+print(result)
+
+LOGIC
+
+The Boyer-Moore Majority Vote algorithm uses two candidates to keep track of potential majority elements. The idea is that if an element appears more than ⌊ n/3 ⌋ times, it must have a significant majority, and having at most two candidates is sufficient to cover all possibilities.
+ ALGORITHM
+Input: An integer array of size n
+Output: List of elements that appear more than ⌊ n/3 ⌋ times
+1. Initialize two variables, candidate1 and candidate2, to None.
+   Initialize two counters, count1 and count2, to 0.
+2. Iterate through the array:
+   a. If count1 is 0, set candidate1 to the current element and increment count1.
+   b. If count2 is 0 and the current element is different from candidate1, set candidate2 to the current element and increment count2.
+   c. If the current element is equal to candidate1, increment count1.
+   d. If the current element is equal to candidate2, increment count2.
+   e. If the current element is different from both candidates, decrement count1 and count2.
+3. Reset counters count1 and count2 to 0.
+4. Iterate through the array again:
+   a. If the current element is equal to candidate1, increment count1.
+   b. If the current element is equal to candidate2, increment count2.
+5. Initialize an empty list called result.
+6. If count1 is greater than ⌊ n/3 ⌋, add candidate1 to the result.
+7. If count2 is greater than ⌊ n/3 ⌋ and candidate2 is different from candidate1, add candidate2 to the result.
+8. Return the result.
+

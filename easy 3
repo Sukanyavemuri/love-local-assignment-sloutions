@@ -1,0 +1,43 @@
+EASY 3
+Given an integer numRows, return the first numRows of Pascal's triangle.
+
+CODE
+
+def generate_pascals_triangle(numRows):
+    triangle = []
+
+    for i in range(numRows):
+        row = [None for _ in range(i + 1)]
+        row[0], row[-1] = 1, 1  
+
+        for j in range(1, len(row) - 1):
+            row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
+
+        triangle.append(row)
+
+    return triangle
+numRows = int(input("Enter the number of rows for Pascal's Triangle: "))
+result = generate_pascals_triangle(numRows)
+print(result)
+
+
+LOGIC
+1.Create an empty list called triangle to store the rows of Pascal's Triangle.
+2.Iterate from 0 to numRows - 1 to generate each row:
+   a. Create a list called row with i + 1 elements, where i is the current row index.
+   b. Set the first and last elements of the row to 1
+   c. For elements in the middle of the row , calculate each element by adding the corresponding elements from the previous row in the triangle. The elements are retrieved using indices j - 1 and j from the previous row.
+   d. Append the generated row to the triangle list.
+3.After completing the loop, the triangle list contains the first numRows of Pascal's Triangle.
+4.Return the triangle.
+
+
+ALGORITHM
+1.Initialize an empty list called triangle to store the rows of Pascal's Triangle.
+2.Iterate from 0 to numRows - 1 to generate each row:
+  a. Create a list called row with i + 1 elements, where i is the current row index.
+  b. Set the first and last elements of the row to 1 (since the first and last elements of each row in Pascal's Triangle are always 1).
+  c. For elements in the middle of the row , calculate each element by adding the corresponding elements from the previous row in the triangle. The elements are retrieved using indices j - 1 and j from the previous row.
+  d. Append the generated row to the triangle list.
+3.After completing the loop, the triangle list contains the first numRows of Pascal's Triangle.
+4.Return the triangle

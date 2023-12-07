@@ -1,0 +1,36 @@
+EASY 1
+Given a string s consisting of words and spaces, return the length of the last word in the string.
+A word is a maximal substring consisting of non-space characters only.
+
+CODE
+
+def length_of_last_word(s):
+    words = s.split()
+    s = s.rstrip()
+    if words:
+        last_word_length = len(words[-1])
+        return last_word_length
+    else:
+        return 0
+input_string = input(" ")
+result = length_of_last_word(input_string)
+print(result)
+
+LOGIC
+1.Splitting the String:The split() method is used to split the input string s into a list of words. By default, it splits the string using whitespace as a delimiter.
+The resulting list is assigned to the variable words.
+2.Removing Trailing Whitespace:The rstrip() method is applied to the original string s. This method removes trailing whitespace from the right end of the string.
+This step ensures that any trailing whitespace after the last word is removed.
+3.Checking for Words:An if statement checks whether the list of words (words) is not empty. If there are words in the list, it means the input string had content.
+4.Calculating Length of Last Word:If there are words, the length of the last word is determined by taking the length of the last element in the words list (words[-1]).
+The result is assigned to the variable last_word_length.
+5.Returning the Result:The function returns last_word_length if there are words, indicating the length of the last word.
+If there are no words in the input string, it returns 0, indicating that there is no last word.
+
+
+ALGORITHM
+Input: Take a manual input string from the user.
+Tokenization: Split the input string into words. We can use the split function to achieve this. This will create  a list of words.
+Remove Trailing Spaces: Remove any trailing spaces from the string to ensure accurate length calculation.
+Find Last Word Length: Get the last word from the list of words and calculate its length using the len function.
+Output: Display the length of the last word.

@@ -1,0 +1,53 @@
+Medium 1
+Given a binary search tree (BST), find the lowest common ancestor (LCA) node of two given nodes in the BST.
+
+CODE
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def lowestCommonAncestor(root, p, q):
+    while root:
+        if p.val < root.val and q.val < root.val:
+            root = root.left
+        elif p.val > root.val and q.val > root.val:
+            root = root.right
+        else:
+            return root
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.left.right.left = TreeNode(3)
+root.left.right.left = TreeNode(5)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+
+p = TreeNode(2)
+q = TreeNode(8)
+
+lca_node = lowestCommonAncestor(root, p, q)
+print(lca_node.val)
+
+LOGIC
+In a BST, the LCA of two nodes p and q is the first node x where p.val <= x.val <= q.val or q.val <= x.val <= p.val. This is because in a BST, all nodes in the left subtree of a node are smaller than the node, and all nodes in the right subtree are greater than the node.
+The algorithm takes advantage of this property to efficiently find the LCA by traversing the tree based on the values of p and q
+
+ALGORITHM
+
+Input:
+
+1.ROOT node of the BST (root).
+2.Two nodes (p and q) for which you need to find the LCA.
+Output:
+
+The LCA node.
+1.Start at the root of the BST (root).
+2.While traversing the tree:
+  a.If both p and q are greater than the current node's value, move to the right subtree.
+  b.If both p and q are smaller than the current node's value, move to the left subtree.
+  c.If one is smaller and the other is greater, then the current node is the LCA.
+3.Return the LCA node.
